@@ -3640,6 +3640,26 @@ body {
   background: #f8f1f3;
 }
 
+.cake-lightbox__detail-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background: var(--cake-brand);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cake-lightbox__detail-action:hover,
+.cake-lightbox__detail-action:focus-visible {
+  background: var(--cake-brand-dark);
+  color: #fff;
+}
+
 .cake-card-badges {
   margin-bottom: 8px;
 }
@@ -3687,13 +3707,21 @@ body {
 
 @media (max-width: 900px) {
   .site-header__inner {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     min-height: 0;
     padding: 10px 0 8px;
   }
 
   .site-branding {
-    width: 100%;
+    width: auto;
+    flex: 1 1 auto;
+  }
+
+  .site-nav,
+  .site-nav.is-open {
+    flex: 0 0 100%;
   }
 
   .site-title {

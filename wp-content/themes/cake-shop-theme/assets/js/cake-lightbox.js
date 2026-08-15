@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const lightboxTitle = lightbox.querySelector('.cake-lightbox__title');
   const lightboxPrice = lightbox.querySelector('.cake-lightbox__price');
   const lightboxExcerpt = lightbox.querySelector('.cake-lightbox__excerpt');
+  const detailAction = lightbox.querySelector('.cake-lightbox__detail-action');
   const lightboxThumbs = lightbox.querySelector('.cake-lightbox__thumbs');
   const closeBtn = lightbox.querySelector('.cake-lightbox__close');
   const overlay = lightbox.querySelector('.cake-lightbox__overlay');
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const nextBtn = lightbox.querySelector('.cake-lightbox__nav--next');
   const triggers = document.querySelectorAll('.cake-popup-trigger');
 
-  if (!lightboxImage || !lightboxTitle || !lightboxPrice || !lightboxExcerpt || !lightboxThumbs || !closeBtn || !overlay || !prevBtn || !nextBtn || !triggers.length) {
+  if (!lightboxImage || !lightboxTitle || !lightboxPrice || !lightboxExcerpt || !detailAction || !lightboxThumbs || !closeBtn || !overlay || !prevBtn || !nextBtn || !triggers.length) {
     return;
   }
 
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function openLightbox(gallery, imageTitle, imageExcerpt, imagePrice, startIndex) {
+  function openLightbox(gallery, imageTitle, imageExcerpt, imagePrice, detailUrl, startIndex) {
     currentGallery = Array.isArray(gallery) ? gallery.filter(Boolean) : [];
     if (!currentGallery.length) return;
 
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     lightboxTitle.textContent = imageTitle || '';
     lightboxPrice.textContent = imagePrice || '';
     lightboxExcerpt.textContent = imageExcerpt || '';
+    detailAction.href = detailUrl || '#';
 
     renderThumbs();
     renderCurrentImage();
@@ -80,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     lightboxTitle.textContent = '';
     lightboxPrice.textContent = '';
     lightboxExcerpt.textContent = '';
+    detailAction.href = '#';
     lightboxThumbs.innerHTML = '';
     currentGallery = [];
     currentIndex = 0;
@@ -111,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         trigger.getAttribute('data-title'),
         trigger.getAttribute('data-excerpt'),
         trigger.getAttribute('data-price'),
+        trigger.getAttribute('data-detail-url'),
         trigger.getAttribute('data-start-index')
       );
     });

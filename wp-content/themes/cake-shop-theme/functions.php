@@ -30,6 +30,11 @@ function cake_shop_theme_setup() {
 }
 add_action('after_setup_theme', 'cake_shop_theme_setup');
 
+function cake_shop_hide_frontend_admin_bar($show_admin_bar) {
+    return is_admin() ? $show_admin_bar : false;
+}
+add_filter('show_admin_bar', 'cake_shop_hide_frontend_admin_bar');
+
 function cake_shop_enqueue_assets() {
     $theme_version = wp_get_theme()->get('Version');
     if (!$theme_version) {
@@ -62,7 +67,8 @@ function cake_shop_enqueue_assets() {
         is_page_template('page-banh-kem.php') ||
         is_page('menu-banh') ||
         is_page('banh-kem') ||
-        is_singular('cake')
+        is_singular('cake') ||
+        is_front_page()
     ) {
         $lightbox_path = get_template_directory() . '/assets/js/cake-lightbox.js';
         $lightbox_version = file_exists($lightbox_path) ? filemtime($lightbox_path) : $theme_version;
@@ -604,6 +610,7 @@ function cake_shop_render_lightbox_markup() {
         <div class="cake-lightbox__title"></div>
         <div class="cake-lightbox__price"></div>
         <div class="cake-lightbox__excerpt"></div>
+        <a class="cake-lightbox__detail-action" href="#">Xem chi tiết</a>
       </div>
     </div>
     <?php

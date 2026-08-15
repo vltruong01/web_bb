@@ -99,6 +99,7 @@
                     data-title="<?php echo esc_attr(get_the_title()); ?>"
                     data-excerpt="<?php echo esc_attr($excerpt_text); ?>"
                     data-price="<?php echo esc_attr(cake_shop_format_price($gia_tham_khao)); ?>"
+                    data-detail-url="<?php echo esc_url(get_permalink()); ?>"
                   >
                 </div>
               <?php endif; ?>

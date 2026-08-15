@@ -168,11 +168,26 @@ if (!function_exists('cake_shop_get_home_featured_query')) {
             } elseif ($trang_thai_banh === 'tam-het') {
               $status_class = 'status-badge--soldout';
             }
+
+            $gallery_urls = cake_shop_get_gallery_image_urls(get_the_ID(), 'large');
+            $gallery_json = esc_attr(wp_json_encode($gallery_urls));
+            $excerpt_text = get_the_excerpt();
         ?>
             <div class="card">
-              <?php if (has_post_thumbnail()) : ?>
-                <div class="cake-thumb">
-                  <?php the_post_thumbnail('medium_large'); ?>
+              <?php if (!empty($gallery_urls)) : ?>
+                <div class="cake-thumb cake-thumb--clickable">
+                  <img
+                    src="<?php echo esc_url($gallery_urls[0]); ?>"
+                    alt="<?php echo esc_attr(get_the_title()); ?>"
+                    loading="lazy"
+                    decoding="async"
+                    class="cake-popup-trigger"
+                    data-gallery="<?php echo $gallery_json; ?>"
+                    data-title="<?php echo esc_attr(get_the_title()); ?>"
+                    data-excerpt="<?php echo esc_attr($excerpt_text); ?>"
+                    data-price="<?php echo esc_attr(cake_shop_format_price($gia_tham_khao)); ?>"
+                    data-detail-url="<?php echo esc_url(get_permalink()); ?>"
+                  >
                 </div>
               <?php endif; ?>
 
@@ -240,11 +255,26 @@ if (!function_exists('cake_shop_get_home_featured_query')) {
             } elseif ($trang_thai_banh === 'nhan-dat-truoc') {
               $status_class = 'status-badge--preorder';
             }
+
+            $gallery_urls = cake_shop_get_gallery_image_urls(get_the_ID(), 'large');
+            $gallery_json = esc_attr(wp_json_encode($gallery_urls));
+            $excerpt_text = get_the_excerpt();
         ?>
             <div class="card">
-              <?php if (has_post_thumbnail()) : ?>
-                <div class="cake-thumb">
-                  <?php the_post_thumbnail('medium_large'); ?>
+              <?php if (!empty($gallery_urls)) : ?>
+                <div class="cake-thumb cake-thumb--clickable">
+                  <img
+                    src="<?php echo esc_url($gallery_urls[0]); ?>"
+                    alt="<?php echo esc_attr(get_the_title()); ?>"
+                    loading="lazy"
+                    decoding="async"
+                    class="cake-popup-trigger"
+                    data-gallery="<?php echo $gallery_json; ?>"
+                    data-title="<?php echo esc_attr(get_the_title()); ?>"
+                    data-excerpt="<?php echo esc_attr($excerpt_text); ?>"
+                    data-price="<?php echo esc_attr(cake_shop_format_price($gia_tham_khao)); ?>"
+                    data-detail-url="<?php echo esc_url(get_permalink()); ?>"
+                  >
                 </div>
               <?php endif; ?>
 
@@ -328,5 +358,7 @@ if (!function_exists('cake_shop_get_home_featured_query')) {
     </div>
   </section>
 </main>
+
+<?php cake_shop_render_lightbox_markup(); ?>
 
 <?php get_footer(); ?>
