@@ -1,0 +1,25 @@
+# Local WordPress configuration and environment-specific secrets
+wp-config.php
+.htaccess
+
+# Generated or local runtime data
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/debug.log
+
+# Dependency and editor files
+node_modules/
+vendor/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Backups and archives
+*.zip
+*.tar
+*.tar.gz
+*.sql
+*.sqlite
+*.log
