@@ -3,7 +3,7 @@ wp-config.php
 .htaccess
 
 # Generated or local runtime data
-wp-content/uploads/
+# Keep uploaded media in the repository so local and remote WordPress assets stay in sync.
 wp-content/upgrade/
 wp-content/cache/
 wp-content/debug.log
