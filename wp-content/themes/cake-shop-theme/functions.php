@@ -4,6 +4,8 @@ remove_action('wp_head', 'wp_site_icon', 99);
 function cake_shop_add_favicon() {
     $favicon_path = get_template_directory() . '/assets/images/favicon-32.png';
     $favicon_url = get_template_directory_uri() . '/assets/images/favicon-32.png';
+    $favicon_48_path = get_template_directory() . '/assets/images/favicon-48.png';
+    $favicon_48_url = get_template_directory_uri() . '/assets/images/favicon-48.png';
 
     $theme_version = wp_get_theme()->get('Version');
     if (!$theme_version) {
@@ -12,8 +14,11 @@ function cake_shop_add_favicon() {
 
     $favicon_version = file_exists($favicon_path) ? filemtime($favicon_path) : $theme_version;
     $favicon_href = $favicon_url . '?v=' . $favicon_version;
+    $favicon_48_href = $favicon_48_url . '?v=' . (file_exists($favicon_48_path) ? filemtime($favicon_48_path) : $favicon_version);
     ?>
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url($favicon_href); ?>">
+    <link rel="icon" type="image/png" sizes="48x48" href="<?php echo esc_url($favicon_48_href); ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url($favicon_href); ?>">
     <link rel="shortcut icon" type="image/png" href="<?php echo esc_url($favicon_href); ?>">
     <?php
 }
