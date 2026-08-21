@@ -118,6 +118,13 @@ if (!function_exists('cake_shop_get_home_featured_query')) {
     </div>
   </section>
 
+  <section class="section home-products" aria-labelledby="home-products-title">
+    <div class="container">
+      <h2 id="home-products-title">Tiệm bánh mì, bánh ngọt và bánh kem Hồng Lập</h2>
+      <p>Hồng Lập phục vụ bánh mì và bánh ngọt mỗi ngày, đồng thời nhận làm bánh kem theo yêu cầu tại Phú Quốc. Xem mẫu bánh, tham khảo giá và liên hệ đặt bánh trực tiếp với tiệm.</p>
+    </div>
+  </section>
+
   <section class="section home-intro">
     <div class="container">
       <h2>Vì sao nhiều khách yêu mến <?php echo esc_html($store_info['shop_name']); ?></h2>

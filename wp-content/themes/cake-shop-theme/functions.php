@@ -234,6 +234,21 @@ function cake_shop_filter_document_title($parts) {
 }
 add_filter('document_title_parts', 'cake_shop_filter_document_title');
 
+/**
+ * Keep the homepage title focused on the real products and local brand.
+ */
+function cake_shop_filter_homepage_title($parts) {
+    if (!is_admin() && is_front_page()) {
+        $shop_name = cake_shop_get_store_field('shop_name', get_bloginfo('name'));
+        $parts['title'] = sprintf('%s | Bánh mì, bánh ngọt và bánh kem Phú Quốc', $shop_name);
+        $parts['site'] = '';
+        $parts['tagline'] = '';
+    }
+
+    return $parts;
+}
+add_filter('document_title_parts', 'cake_shop_filter_homepage_title', 11);
+
 function cake_shop_add_private_page_robots() {
     if (!is_page(['quan-ly-banh', 'quan-ly-tiem', 'dang-nhap-tiem', 'gop-y-khach-hang'])) {
         return;
@@ -362,6 +377,33 @@ function cake_shop_add_bakery_schema() {
     echo "\n<script type=\"application/ld+json\">" . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "</script>\n";
 }
 add_action('wp_head', 'cake_shop_add_bakery_schema', 20);
+
+function cake_shop_add_website_schema() {
+    if (!is_front_page()) {
+        return;
+    }
+
+    $shop_name = cake_shop_get_store_field('shop_name', get_bloginfo('name'));
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        'name' => $shop_name,
+        'alternateName' => [
+            'Tiệm bánh mì Hồng Lập',
+            'Tiệm bánh ngọt Hồng Lập',
+            'Tiệm bánh kem Hồng Lập',
+        ],
+        'url' => home_url('/'),
+        'publisher' => [
+            '@type' => 'Bakery',
+            'name' => $shop_name,
+            'url' => home_url('/'),
+        ],
+    ];
+
+    echo "\n<script type=\"application/ld+json\">" . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "</script>\n";
+}
+add_action('wp_head', 'cake_shop_add_website_schema', 20);
 
 function cake_shop_get_product_offer_schema($post_id) {
     $raw_price = (string) get_post_meta($post_id, '_gia_tham_khao', true);
