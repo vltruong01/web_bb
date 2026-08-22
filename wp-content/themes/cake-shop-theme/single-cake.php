@@ -61,6 +61,7 @@
                 type="button"
                 class="cake-detail__gallery-item cake-popup-trigger"
                 data-gallery="<?php echo $gallery_json; ?>"
+                data-lightbox-mode="image-only"
                 data-title="<?php echo esc_attr(get_the_title()); ?>"
                 data-excerpt="<?php echo esc_attr(get_the_excerpt()); ?>"
                 data-price="<?php echo esc_attr(cake_shop_format_price($gia_tham_khao)); ?>"

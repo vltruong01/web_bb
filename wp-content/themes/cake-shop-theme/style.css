@@ -3654,6 +3654,19 @@ body {
   text-decoration: none;
 }
 
+.cake-lightbox.is-image-only .cake-lightbox__nav,
+.cake-lightbox.is-image-only .cake-lightbox__thumbs,
+.cake-lightbox.is-image-only .cake-lightbox__title,
+.cake-lightbox.is-image-only .cake-lightbox__price,
+.cake-lightbox.is-image-only .cake-lightbox__excerpt,
+.cake-lightbox.is-image-only .cake-lightbox__detail-action {
+  display: none;
+}
+
+.cake-lightbox.is-image-only .cake-lightbox__media {
+  margin-bottom: 0;
+}
+
 .cake-lightbox__detail-action:hover,
 .cake-lightbox__detail-action:focus-visible {
   background: var(--cake-brand-dark);

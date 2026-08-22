@@ -55,11 +55,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function openLightbox(gallery, imageTitle, imageExcerpt, imagePrice, detailUrl, startIndex) {
-    currentGallery = Array.isArray(gallery) ? gallery.filter(Boolean) : [];
+  function openLightbox(gallery, imageTitle, imageExcerpt, imagePrice, detailUrl, startIndex, mode) {
+    const allImages = Array.isArray(gallery) ? gallery.filter(Boolean) : [];
+    const selectedIndex = Math.min(Math.max(parseInt(startIndex, 10) || 0, 0), Math.max(allImages.length - 1, 0));
+    const imageOnly = mode === 'image-only';
+
+    currentGallery = imageOnly ? (allImages[selectedIndex] ? [allImages[selectedIndex]] : []) : allImages;
     if (!currentGallery.length) return;
 
-    currentIndex = Math.min(Math.max(parseInt(startIndex, 10) || 0, 0), currentGallery.length - 1);
+    currentIndex = imageOnly ? 0 : Math.min(selectedIndex, currentGallery.length - 1);
+    lightbox.classList.toggle('is-image-only', imageOnly);
     lightboxTitle.textContent = imageTitle || '';
     lightboxPrice.textContent = imagePrice || '';
     lightboxExcerpt.textContent = imageExcerpt || '';
@@ -75,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function closeLightbox() {
     lightbox.classList.remove('is-open');
+    lightbox.classList.remove('is-image-only');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
     lightboxImage.src = '';
@@ -115,7 +121,8 @@ document.addEventListener('DOMContentLoaded', function () {
         trigger.getAttribute('data-excerpt'),
         trigger.getAttribute('data-price'),
         trigger.getAttribute('data-detail-url'),
-        trigger.getAttribute('data-start-index')
+        trigger.getAttribute('data-start-index'),
+        trigger.getAttribute('data-lightbox-mode')
       );
     });
   });
